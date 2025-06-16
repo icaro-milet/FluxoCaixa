@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - AppService", "0 - AppService", "{C8BF1F49-F1FC-490D-ABE0-FBEFBA9C5A62}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Application", "1 - Application", "{8D7F4008-BA5F-45F8-AAE9-9CEBB0B6865D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Domain", "2 - Domain", "{35597035-4ADA-4353-941F-1FD5299EEC4E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Infra", "3 - Infra", "{EB2BFFFC-1F84-4615-97A0-98F2C91471A9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Tests", "4 - Tests", "{8118BBF8-8354-47FF-B096-55EA9F3D0A96}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lancamento.API", "Lancamento.API", "{55B835A3-951E-497E-939E-FD0BB8085368}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Consolidado.Worker", "Consolidado.Worker", "{6C863F63-461B-4759-A278-670E33F99E9D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{55B835A3-951E-497E-939E-FD0BB8085368} = {C8BF1F49-F1FC-490D-ABE0-FBEFBA9C5A62}
+		{6C863F63-461B-4759-A278-670E33F99E9D} = {C8BF1F49-F1FC-490D-ABE0-FBEFBA9C5A62}
+	EndGlobalSection
+EndGlobal
