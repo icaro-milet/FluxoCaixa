@@ -72,7 +72,7 @@ Infrastructure
 
 ### Pré-requisitos
 
-- [.NET 8 SDK](https://dotnet.microsoft.com/download)
+- [.NET 9 SDK](https://dotnet.microsoft.com/download)
 - [Docker](https://www.docker.com/)
 - [Docker Compose](https://docs.docker.com/compose/)
 
