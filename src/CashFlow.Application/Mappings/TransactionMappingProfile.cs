@@ -1,6 +1,7 @@
 using AutoMapper;
 using CashFlow.Application.DTOs;
 using CashFlow.Domain.Aggregates.CashFlow.Entities;
+using CashFlow.Domain.Aggregates.CashFlow.ValueObjects;
 
 namespace CashFlow.Application.Mappings;
 

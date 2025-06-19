@@ -22,6 +22,19 @@ namespace CashFlow.Infra.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("CashFlow.Domain.Aggregates.CashFlow.Entities.DailyConsolidatedBalance", b =>
+                {
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<decimal>("ConsolidatedBalance")
+                        .HasColumnType("numeric");
+
+                    b.HasKey("Date");
+
+                    b.ToTable("DailyConsolidatedBalances", (string)null);
+                });
+
             modelBuilder.Entity("CashFlow.Domain.Aggregates.CashFlow.Entities.Transaction", b =>
                 {
                     b.Property<Guid>("Id")
@@ -31,14 +44,15 @@ namespace CashFlow.Infra.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("numeric");
 
-                    b.Property<DateOnly>("Date")
-                        .HasColumnType("date");
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<int>("Type")
-                        .HasColumnType("integer");
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 

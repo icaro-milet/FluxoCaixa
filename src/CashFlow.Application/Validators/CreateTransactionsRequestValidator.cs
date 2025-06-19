@@ -17,8 +17,8 @@ public class CreateTransactionsRequestValidator : AbstractValidator<CreateTransa
             .Must(BeTodayOrEarlier).WithMessage("Date cannot be in the future.");
     }
 
-    private bool BeTodayOrEarlier(DateOnly date)
+    private bool BeTodayOrEarlier(DateTime date)
     {
-        return date <= DateOnly.FromDateTime(DateTime.Today);
+        return date.Date <= DateTime.Today;
     }
 }

@@ -6,7 +6,7 @@ namespace CashFlow.Application.DTOs;
 
 public class CreateTransactionRequestDTO
 {
-    public CreateTransactionRequestDTO(decimal amount, TransactionType type, DateOnly date)
+    public CreateTransactionRequestDTO(decimal amount, TransactionType type, DateTime date)
     {
         Amount = amount;
         Type = type;
@@ -22,5 +22,5 @@ public class CreateTransactionRequestDTO
     
     public string Description { get; set; } = string.Empty;
     
-    public DateOnly Date { get; set; }
+    public DateTime Date { get; set; }
 }
