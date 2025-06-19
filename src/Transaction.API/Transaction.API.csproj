@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="AutoMapper" Version="14.0.0" />
+        <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.1" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="9.0.6" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.1.0" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.1.0" />
@@ -23,6 +23,12 @@
     <ItemGroup>
       <ProjectReference Include="..\CashFlow.Application\CashFlow.Application.csproj" />
       <ProjectReference Include="..\CashFlow.Infra\CashFlow.Infra.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="CashFlow.Application">
+        <HintPath>bin\Debug\net9.0\CashFlow.Application.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 </Project>
