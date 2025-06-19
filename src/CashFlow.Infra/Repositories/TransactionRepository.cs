@@ -15,6 +15,7 @@ public class TransactionRepository : ITransactionRepository
     public async Task<Domain.Aggregates.CashFlow.Entities.Transaction> AddAsync(Transaction transaction)
     {
         var result = await _transactionContext.AddAsync(transaction);
+        await _transactionContext.SaveChangesAsync(); 
         
         return result.Entity;
     }
