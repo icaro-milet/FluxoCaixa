@@ -4,5 +4,5 @@ namespace CashFlow.Worker.Domain.Interfaces.Repositories;
 
 public interface ITransactionRepository
 {
-    Task<List<Transaction>> GetTransactionsByDateAsync(DateTime date);
+    Task<List<Transaction>> GetTransactionsByDateAsync(DateOnly date);
 }

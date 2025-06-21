@@ -22,7 +22,8 @@ public class DailyConsolidationAppService : IDailyConsolidationAppService
 
     public async Task ProcessDailyConsolidationAsync()
     {
-        var dateToConsolidate = DateTime.UtcNow.Date.AddDays(-1);
+        var dateToConsolidate = DateOnly.FromDateTime(DateTime.Today);
+        
         _logger.LogInformation($"Consolidando saldo para o dia {dateToConsolidate:yyyy-MM-dd}");
 
         var transactions = await _transactionRepository.GetTransactionsByDateAsync(dateToConsolidate);

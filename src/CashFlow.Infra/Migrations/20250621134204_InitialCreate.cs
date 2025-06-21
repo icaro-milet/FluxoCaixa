@@ -15,7 +15,7 @@ namespace CashFlow.Infra.Migrations
                 name: "DailyConsolidatedBalances",
                 columns: table => new
                 {
-                    Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Date = table.Column<DateOnly>(type: "date", nullable: false),
                     ConsolidatedBalance = table.Column<decimal>(type: "numeric", nullable: false)
                 },
                 constraints: table =>
@@ -31,7 +31,7 @@ namespace CashFlow.Infra.Migrations
                     Amount = table.Column<decimal>(type: "numeric", nullable: false),
                     Type = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
-                    Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    Date = table.Column<DateOnly>(type: "date", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -17,7 +17,10 @@ public class DailyBalanceRepository : IDailyBalanceRepository
     {
         var existing = await _context.DailyConsolidatedBalances.FindAsync(balance.Date);
         if (existing == null)
+        {
             await _context.DailyConsolidatedBalances.AddAsync(balance);
+            await _context.SaveChangesAsync();
+        }
         else
             existing.ConsolidatedBalance = balance.ConsolidatedBalance;
 

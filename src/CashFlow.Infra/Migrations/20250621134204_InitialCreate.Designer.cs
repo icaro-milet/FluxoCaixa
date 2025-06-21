@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CashFlow.Infra.Migrations
 {
     [DbContext(typeof(TransactionContext))]
-    [Migration("20250619205845_InitialCreate")]
+    [Migration("20250621134204_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -27,8 +27,8 @@ namespace CashFlow.Infra.Migrations
 
             modelBuilder.Entity("CashFlow.Domain.Aggregates.CashFlow.Entities.DailyConsolidatedBalance", b =>
                 {
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
 
                     b.Property<decimal>("ConsolidatedBalance")
                         .HasColumnType("numeric");
@@ -47,8 +47,8 @@ namespace CashFlow.Infra.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("numeric");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
 
                     b.Property<string>("Description")
                         .HasColumnType("text");

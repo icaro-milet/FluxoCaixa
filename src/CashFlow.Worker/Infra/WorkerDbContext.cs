@@ -19,6 +19,10 @@ public class WorkerDbContext : DbContext
             .HasKey(d => d.Date);
         modelBuilder.Entity<DailyConsolidatedBalance>()
             .ToTable("DailyConsolidatedBalances");
+        
+        modelBuilder.Entity<Transaction>()
+            .Property(t => t.Type)
+            .HasConversion<string>();
 
         base.OnModelCreating(modelBuilder);
     }

@@ -14,15 +14,14 @@ public class TransactionRepository : ITransactionRepository
         _context = context;
     }
 
-    public async Task<List<Transaction>> GetTransactionsByDateAsync(DateTime date)
+    public async Task<List<Transaction>> GetTransactionsByDateAsync(DateOnly date)
     {
-        var startOfDayUtc = date.Date.ToUniversalTime();
-        var endOfDayUtc = startOfDayUtc.AddDays(1);
-
         IQueryable<Transaction> query = _context.Transactions;
-
+        
+        // var test = query.;
+        
         var result = await query
-            .Where(t => t.Date >= startOfDayUtc && t.Date < endOfDayUtc)
+            .Where(t => t.Date.Equals(date))
             .ToListAsync();
 
         return result;
