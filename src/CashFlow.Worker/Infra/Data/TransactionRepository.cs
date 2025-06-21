@@ -18,8 +18,6 @@ public class TransactionRepository : ITransactionRepository
     {
         IQueryable<Transaction> query = _context.Transactions;
         
-        // var test = query.;
-        
         var result = await query
             .Where(t => t.Date.Equals(date))
             .ToListAsync();

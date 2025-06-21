@@ -23,6 +23,6 @@ public class CreateTransactionsRequestValidator : AbstractValidator<CreateTransa
     
         var nextDay = today.AddDays(1);
     
-        return date == nextDay;
+        return date != nextDay;
     }
 }

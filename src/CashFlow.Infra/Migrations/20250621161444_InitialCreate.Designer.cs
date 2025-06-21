@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CashFlow.Infra.Migrations
 {
     [DbContext(typeof(TransactionContext))]
-    [Migration("20250621134204_InitialCreate")]
+    [Migration("20250621161444_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

@@ -1,19 +1,15 @@
-using System;
 using System.Text.Json.Serialization;
 using CashFlow.Application.AppServices;
 using CashFlow.Application.Interfaces.Services;
 using CashFlow.Application.Validators;
 using CashFlow.Domain.Aggregates.CashFlow.Interfaces.Services;
 using CashFlow.Domain.Aggregates.CashFlow.Services;
-using CashFlow.Infra;
 using FluentValidation.AspNetCore;
-using Microsoft.EntityFrameworkCore;
 using CashFlow.Domain.Aggregates.CashFlow.Interfaces.Repositories;
 using CashFlow.Infra.Repositories;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-
+using CashFlow.Worker.Consumers;
+using MassTransit;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -60,27 +56,45 @@ builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
 builder.Services.AddScoped<ITransactionAppService, TransactionAppService>();
 builder.Services.AddScoped<ITransactionService, TransactionService>();
 
-builder.Services.AddDbContext<TransactionContext>(p =>
+
+
+builder.Services.AddMassTransit();
+builder.Services.AddMassTransitHostedService();
+
+builder.Services.AddMassTransit(x =>
 {
-    p.UseNpgsql(builder.Configuration["ConnectionString:Database"],
-        w =>
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host("localhost", "/", h =>
         {
-            w.CommandTimeout(40);
-            w.EnableRetryOnFailure(
-                maxRetryCount: 3,
-                maxRetryDelay: TimeSpan.FromSeconds(5),
-                errorCodesToAdd: null);
+            h.Username("guest");
+            h.Password("guest");
         });
-    p.EnableSensitiveDataLogging();
-    p.UseQueryTrackingBehavior(Microsoft.EntityFrameworkCore.QueryTrackingBehavior.TrackAll);
-    p.EnableDetailedErrors();
+    });
 });
+
+
+builder.Services.AddDbContext<CashFlow.Infra.TransactionContext>(options =>
+{
+    options.UseNpgsql(builder.Configuration.GetConnectionString("Database"), npgsqlOptions =>
+    {
+        npgsqlOptions.CommandTimeout(40);
+        npgsqlOptions.EnableRetryOnFailure(3, TimeSpan.FromSeconds(5), null);
+    });
+    options.EnableSensitiveDataLogging();
+    options.UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll);
+    options.EnableDetailedErrors();
+});
+
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+builder.Logging.SetMinimumLevel(LogLevel.Debug);
 
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-    var context = scope.ServiceProvider.GetRequiredService<TransactionContext>();
+    var context = scope.ServiceProvider.GetRequiredService<CashFlow.Infra.TransactionContext>();
     context.Database.Migrate(); 
 }
 

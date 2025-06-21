@@ -5,5 +5,5 @@ namespace CashFlow.Domain.Aggregates.CashFlow.Interfaces.Repositories;
 public interface ITransactionRepository
 {
     Task<Entities.Transaction> AddAsync(Transaction transaction);
-    Task<IEnumerable<Transaction>> GetByDateAsync(DateOnly date);
+    //Task<Entities.Transaction> PublishEvent(TransactionCreatedEvent transaction);
 }
