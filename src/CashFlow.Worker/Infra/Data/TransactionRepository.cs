@@ -15,7 +15,7 @@ public class TransactionRepository : ITransactionRepository
     }
 
     public async Task<List<Transaction>> GetTransactionsByDateAsync(DateOnly date)
-    {
+        {
         IQueryable<Transaction> query = _context.Transactions;
         
         var result = await query

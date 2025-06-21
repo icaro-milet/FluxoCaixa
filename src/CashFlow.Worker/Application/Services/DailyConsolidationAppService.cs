@@ -42,4 +42,27 @@ public class DailyConsolidationAppService : IDailyConsolidationAppService
 
         _logger.LogInformation($"Saldo consolidado: {total}");
     }
+    
+    public async Task ProcessTransactionAsync(TransactionCreatedEvent evt)
+    {
+        var date = DateOnly.FromDateTime(evt.Date);
+        var currentBalance = await _dailyBalanceRepository.GetByDateAsync(date);
+
+        if (currentBalance == null)
+        {
+            currentBalance = new DailyConsolidatedBalance
+            {
+                Date = date,
+                ConsolidatedBalance = evt.Amount
+            };
+            await _dailyBalanceRepository.SaveDailyBalanceAsync(currentBalance);
+        }
+        else
+        {
+            currentBalance.ConsolidatedBalance += evt.Amount;
+            await _dailyBalanceRepository.UpdateAsync(currentBalance);
+        }
+
+        _logger.LogInformation($"Saldo consolidado atualizado para {date}: {currentBalance.ConsolidatedBalance}");
+    }
 }

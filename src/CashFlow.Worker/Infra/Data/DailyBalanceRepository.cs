@@ -1,5 +1,6 @@
 using CashFlow.Domain.Aggregates.CashFlow.Entities;
 using CashFlow.Worker.Domain.Interfaces.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace CashFlow.Worker.Infra.Data;
@@ -24,6 +25,24 @@ public class DailyBalanceRepository : IDailyBalanceRepository
         else
             existing.ConsolidatedBalance = balance.ConsolidatedBalance;
 
+        await _context.SaveChangesAsync();
+    }
+    
+    public async Task<DailyConsolidatedBalance?> GetByDateAsync(DateOnly date)
+    {
+        return await _context.DailyConsolidatedBalances
+            .FirstOrDefaultAsync(d => d.Date == date);
+    }
+
+    public async Task AddAsync(DailyConsolidatedBalance entity)
+    {
+        await _context.DailyConsolidatedBalances.AddAsync(entity);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task UpdateAsync(DailyConsolidatedBalance entity)
+    {
+        _context.DailyConsolidatedBalances.Update(entity);
         await _context.SaveChangesAsync();
     }
 }
