@@ -1,9 +1,6 @@
-using System;
-using System.Threading.Tasks;
 using CashFlow.Domain.Aggregates.CashFlow.Entities;
 using CashFlow.Worker.Application.Interfaces;
 using CashFlow.Worker.Domain.Interfaces.Repositories;
-using Microsoft.Extensions.Logging;
 
 namespace CashFlow.Worker.Application.Services;
 

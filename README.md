@@ -7,7 +7,7 @@ Este projeto tem como objetivo controlar lançamentos financeiros (débitos e cr
 
 ## 🧱 Arquitetura
 
-O sistema foi construído com base nos princípios de **Clean Architecture**, **DDD (Domain-Driven Design)** e separação de responsabilidades em múltiplos microsserviços com comunicação assíncrona via mensageria.
+O sistema foi construído com base nos princípios de **Clean Architecture**, **DDD (Domain-Driven Design)** e separação de responsabilidades em múltiplas camadas e divisão de microsserviços.
 
 ### 🔄 Microsserviços
 
@@ -15,7 +15,7 @@ O sistema foi construído com base nos princípios de **Clean Architecture**, **
   Exposição de uma API REST para registrar lançamentos financeiros.
   
 - **Consolidado.Worker**  
-  Serviço em background que escuta eventos de lançamentos e processa o saldo diário consolidado.
+  Serviço em background que realiza lançamentos e processa o saldo diário consolidado.
 
 ---
 
@@ -128,8 +128,7 @@ dotnet test src/Tests/IntegrationTests
 ## 📈 Escalabilidade e Resiliência
 
 - Escalabilidade horizontal dos microsserviços via Docker/Kubernetes
-- RabbitMQ permite filas distribuídas e entrega assíncrona
-- Serviços independentes com retry/resiliência no Worker
+- RabbitMQ permite filas distribuídas e entrega assíncrona (não implementada no MVP)
 - API continua funcional mesmo que o Worker falhe (comunicação desacoplada)
 
 ---

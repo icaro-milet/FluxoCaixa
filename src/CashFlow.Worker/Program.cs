@@ -1,4 +1,3 @@
-using System;
 using CashFlow.Worker.Application.Interfaces;
 using CashFlow.Worker.Application.Services;
 using CashFlow.Worker.Consumers;
@@ -9,12 +8,9 @@ using CashFlow.Worker.Services;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configuração do DbContext
 builder.Services.AddDbContext<WorkerDbContext>(p =>
 {
     p.UseNpgsql(builder.Configuration["ConnectionString:Database"], w =>
@@ -27,13 +23,11 @@ builder.Services.AddDbContext<WorkerDbContext>(p =>
     p.EnableDetailedErrors();
 });
 
-// Injeção de dependência
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
 builder.Services.AddScoped<IDailyBalanceRepository, DailyBalanceRepository>();
 builder.Services.AddScoped<IDailyConsolidationAppService, DailyConsolidationAppService>();
 builder.Services.AddHostedService<ConsolidationWorker>();
 
-// ✅ Configuração correta do MassTransit no DI principal
 builder.Services.AddMassTransit(x =>
 {
     x.AddConsumer<TransactionCreatedConsumer>();

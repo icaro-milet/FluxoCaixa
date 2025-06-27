@@ -23,9 +23,4 @@
       <ProjectReference Include="..\CashFlow.Domain\CashFlow.Domain.csproj" />
       <ProjectReference Include="..\CashFlow.Infra\CashFlow.Infra.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Domain\Entities\" />
-      <Folder Include="Infra\Messaging\" />
-    </ItemGroup>
 </Project>
